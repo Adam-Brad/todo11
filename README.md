@@ -1,7 +1,9 @@
 # Todo Typescript App
 
 ## Set Up Instructions
-- Fork and clone this repository.
+- Clone this repository.
+- Remove `.git` folder.
+- Run `git init`. 
 - Once inside the directory, install dependencies with `npm install`.
 - Run the development server with `npm start`.
 - The application will run on `localhost` in the browser.
@@ -16,4 +18,3 @@
 - Material UI
 - React Testing Library
 - UUID
-
