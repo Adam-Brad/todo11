@@ -2,7 +2,7 @@
 
 ## Set Up Instructions
 - Clone this repository.
-- Remove `.git` folder.
+- Remove `.git` folder with `rm -rf .git`.
 - Run `git init`. 
 - Once inside the directory, install dependencies with `npm install`.
 - Run the development server with `npm start`.
