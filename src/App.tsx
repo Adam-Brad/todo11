@@ -16,12 +16,20 @@ function App() {
         }
         setList([...list, todoToAdd]);
     };
+    
+    const handleDeleteFromList = (index: number) => {
+        const listAfterDelete = list.filter((todo: Todo, i: number) => i !== index);
+        setList(listAfterDelete);
+    }
 
     return (
     <div className="App">
         <h1>Typescript Todo #11</h1>
         <Input handleAddToList={handleAddToList} />
-        <List list={list} />
+        <List 
+            list={list}
+            handleDeleteFromList={handleDeleteFromList}
+        />
     </div>
   );
 }
