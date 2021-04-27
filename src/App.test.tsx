@@ -46,3 +46,46 @@ test('clicking a todo\'s delete button doesn\'t affect other todos', () => {
     expect(getByText('get eggs')).toBeInTheDocument();
 });
 
+test('clicking a todo\'s mark button toggles on the classname with the strikethrough styling and renders correct button text', () => {
+   const { getByLabelText, getByText, getByTestId } = render(<App />);
+   const input = getByLabelText('Add a todo to the list');
+   const addButton = getByText('Click to add a Todo');
+
+   addATodo(input, 'get bread', addButton);
+    expect(getByText('get bread')).not.toHaveClass('completed');
+
+    fireEvent.click(getByTestId('get bread-toggle'));
+
+   expect(getByText('get bread')).toHaveClass('completed');
+   expect(getByTestId('get bread-toggle').innerHTML).toBe('Unmark');
+});
+
+test('clicking a todo\'s mark button twice toggles on the classname on and back off and renders correct button text', () => {
+    const { getByLabelText, getByText, getByTestId } = render(<App />);
+    const input = getByLabelText('Add a todo to the list');
+    const addButton = getByText('Click to add a Todo');
+
+    addATodo(input, 'get bread', addButton);
+    fireEvent.click(getByTestId('get bread-toggle'));
+    fireEvent.click(getByTestId('get bread-toggle'));
+
+    expect(getByText('get bread')).not.toHaveClass('completed');
+    expect(getByTestId('get bread-toggle').innerHTML).toBe('Mark');
+
+});
+
+test('clicking a todo\'s mark button doesn\'t affect other todos styling or button text', () => {
+    const { getByLabelText, getByText, getByTestId } = render(<App />);
+    const input = getByLabelText('Add a todo to the list');
+    const addButton = getByText('Click to add a Todo');
+
+    addATodo(input, 'get bread', addButton);
+    addATodo(input, 'get eggs', addButton);
+    addATodo(input, 'get cheese', addButton);
+
+    fireEvent.click(getByTestId('get eggs-toggle'));
+
+    expect(getByText('get eggs')).toHaveClass('completed');
+    expect(getByText('get bread')).not.toHaveClass('completed');
+    expect(getByText('get cheese')).not.toHaveClass('completed');
+});
