@@ -6,11 +6,12 @@ interface ListProps {
     list: Todo[];
     handleDeleteFromList: (index: number) => void;
     handleToggleComplete: (index: number) => void;
+    handleSave: (task: string, index: number) => void;
 }
 
 export default function List(props: ListProps) {
 
-    const { list, handleDeleteFromList, handleToggleComplete } = props;
+    const { list, handleDeleteFromList, handleToggleComplete, handleSave } = props;
 
     const displayedList = list.map((todo: Todo, index: number) => (
         <Item
@@ -18,6 +19,7 @@ export default function List(props: ListProps) {
             index={index}
             handleDeleteFromList={handleDeleteFromList}
             handleToggleComplete={handleToggleComplete}
+            handleSave={handleSave}
         />
         // <>
         //     <li key={todo.id}>{todo.text}</li>

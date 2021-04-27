@@ -21,7 +21,7 @@ export default function Input(props: InputProps) {
     return (
       <>
           <label htmlFor="input">Add a todo to the list</label>
-          <input onChange={handleChange} id="input" />
+          <input onChange={handleChange} id="input" value={task} />
           <button onClick={addToList}>Click to add a Todo</button>
       </>
     );

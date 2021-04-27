@@ -89,3 +89,34 @@ test('clicking a todo\'s mark button doesn\'t affect other todos styling or butt
     expect(getByText('get bread')).not.toHaveClass('completed');
     expect(getByText('get cheese')).not.toHaveClass('completed');
 });
+
+test('clicking the edit button, typing in new text, and clicking save renders the new text and not the old', () => {
+    const { getByLabelText, getByText, getByTestId, queryByText } = render(<App />);
+    const input = getByLabelText('Add a todo to the list');
+    const addButton = getByText('Click to add a Todo');
+
+    addATodo(input, 'get bread', addButton);
+    fireEvent.click(getByTestId('get bread-edit'));
+
+    addATodo(getByTestId('get bread-input'), 'get cheese', getByTestId('get bread-save'));
+
+    expect(getByText('get cheese')).toBeInTheDocument();
+    expect(queryByText('get bread')).not.toBeInTheDocument();
+});
+
+test('editing a specific todo does not affect others', () => {
+    const { getByLabelText, getByText, getByTestId, queryByText } = render(<App />);
+    const input = getByLabelText('Add a todo to the list');
+    const addButton = getByText('Click to add a Todo');
+
+    addATodo(input, 'get bread', addButton);
+    addATodo(input, 'get meat', addButton);
+    addATodo(input, 'get eggs', addButton);
+    fireEvent.click(getByTestId('get bread-edit'));
+    addATodo(getByTestId('get bread-input'), 'get cheese', getByTestId('get bread-save'));
+
+    expect(getByText('get cheese')).toBeInTheDocument();
+    expect(queryByText('get bread')).not.toBeInTheDocument();
+    expect(getByText('get eggs')).toBeInTheDocument();
+    expect(getByText('get meat')).toBeInTheDocument();
+});
