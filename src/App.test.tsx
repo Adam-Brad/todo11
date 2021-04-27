@@ -19,4 +19,30 @@ test('adding text to the input and clicking the add button clears the input and 
      expect(getByText("get bread")).toBeInTheDocument();
 });
 
+test('clicking a todo\'s delete button removes that text from the list', () => {
+   const { getByText, getByTestId, getByLabelText, queryByText } = render(<App />);
+   const input = getByLabelText("Add a todo to the list");
+   const addButton = getByText("Click to add a Todo");
+
+   addATodo(input, 'get bread', addButton);
+   fireEvent.click(getByTestId('get bread-delete'));
+
+   expect(queryByText('get bread')).not.toBeInTheDocument();
+});
+
+test('clicking a todo\'s delete button doesn\'t affect other todos', () => {
+    const { getByText, getByTestId, getByLabelText, queryByText } = render(<App />);
+    const input = getByLabelText("Add a todo to the list");
+    const addButton = getByText("Click to add a Todo");
+
+    addATodo(input, 'get bread', addButton);
+    addATodo(input, 'get cheese', addButton);
+    addATodo(input, 'get eggs', addButton);
+
+    fireEvent.click(getByTestId('get cheese-delete'));
+
+    expect(queryByText('get cheese')).not.toBeInTheDocument();
+    expect(getByText('get bread')).toBeInTheDocument();
+    expect(getByText('get eggs')).toBeInTheDocument();
+});
 
