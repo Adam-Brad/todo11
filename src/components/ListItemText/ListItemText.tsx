@@ -9,7 +9,7 @@ interface ListItemTextProps {
 }
 
 export default function ListItemText(props: ListItemTextProps) {
-    const [currentTask, setCurrentTask] = useState<string>('');
+    const [currentTask, setCurrentTask] = useState<string>(props.todo.text);
     const [isEditable, setIsEditable] = useState<boolean>(false);
 
     const { todo, index, handleSave} = props;

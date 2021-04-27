@@ -120,3 +120,15 @@ test('editing a specific todo does not affect others', () => {
     expect(getByText('get eggs')).toBeInTheDocument();
     expect(getByText('get meat')).toBeInTheDocument();
 });
+
+test('clicking edit and then save without changing the text preserves the original text', () => {
+    const { getByLabelText, getByText, getByTestId, queryByText } = render(<App />);
+    const input = getByLabelText('Add a todo to the list');
+    const addButton = getByText('Click to add a Todo');
+
+    addATodo(input, 'get bread', addButton);
+    fireEvent.click(getByTestId('get bread-edit'));
+    fireEvent.click(getByTestId('get bread-save'));
+
+    expect(getByText('get bread')).toBeInTheDocument();
+});
