@@ -46,3 +46,13 @@ test('clicking a todo\'s delete button doesn\'t affect other todos', () => {
     expect(getByText('get eggs')).toBeInTheDocument();
 });
 
+test('clicking a todo\'s mark button toggles on the classname with the strikethrough styling', () => {
+   const { getByLabelText, getByText, getByTestId } = render(<App />);
+   const input = getByLabelText('Add a todo to the list');
+   const addButton = getByText('Click to add a Todo');
+
+   addATodo(input, 'get bread', addButton);
+   fireEvent.click(getByTestId('get bread-toggle'));
+
+   expect(getByText('get bread')).toHaveClass('completed');
+});

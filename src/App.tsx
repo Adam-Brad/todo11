@@ -22,6 +22,16 @@ function App() {
         setList(listAfterDelete);
     }
 
+    const handleToggleComplete = (index: number) => {
+        const listAfterToggleComplete = list.map((todo: Todo, i: number) => {
+            if (i === index) {
+                todo.isCompleted = !todo.isCompleted;
+            }
+            return todo;
+        });
+        setList(listAfterToggleComplete);
+    };
+
     return (
     <div className="App">
         <h1>Typescript Todo #11</h1>
@@ -29,6 +39,7 @@ function App() {
         <List 
             list={list}
             handleDeleteFromList={handleDeleteFromList}
+            handleToggleComplete={handleToggleComplete}
         />
     </div>
   );
