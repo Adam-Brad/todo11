@@ -46,7 +46,7 @@ test('clicking a todo\'s delete button doesn\'t affect other todos', () => {
     expect(getByText('get eggs')).toBeInTheDocument();
 });
 
-test('clicking a todo\'s mark button toggles on the classname with the strikethrough styling', () => {
+test('clicking a todo\'s mark button toggles on the classname with the strikethrough styling and renders correct button text', () => {
    const { getByLabelText, getByText, getByTestId } = render(<App />);
    const input = getByLabelText('Add a todo to the list');
    const addButton = getByText('Click to add a Todo');
@@ -57,9 +57,10 @@ test('clicking a todo\'s mark button toggles on the classname with the strikethr
     fireEvent.click(getByTestId('get bread-toggle'));
 
    expect(getByText('get bread')).toHaveClass('completed');
+   expect(getByTestId('get bread-toggle').innerHTML).toBe('Unmark');
 });
 
-test('clicking a todo\'s mark button twice toggles on the classname on and back off', () => {
+test('clicking a todo\'s mark button twice toggles on the classname on and back off and renders correct button text', () => {
     const { getByLabelText, getByText, getByTestId } = render(<App />);
     const input = getByLabelText('Add a todo to the list');
     const addButton = getByText('Click to add a Todo');
@@ -69,9 +70,11 @@ test('clicking a todo\'s mark button twice toggles on the classname on and back 
     fireEvent.click(getByTestId('get bread-toggle'));
 
     expect(getByText('get bread')).not.toHaveClass('completed');
+    expect(getByTestId('get bread-toggle').innerHTML).toBe('Mark');
+
 });
 
-test('clicking a todo\'s mark button doesn\'t affect other todos', () => {
+test('clicking a todo\'s mark button doesn\'t affect other todos styling or button text', () => {
     const { getByLabelText, getByText, getByTestId } = render(<App />);
     const input = getByLabelText('Add a todo to the list');
     const addButton = getByText('Click to add a Todo');
@@ -85,6 +88,4 @@ test('clicking a todo\'s mark button doesn\'t affect other todos', () => {
     expect(getByText('get eggs')).toHaveClass('completed');
     expect(getByText('get bread')).not.toHaveClass('completed');
     expect(getByText('get cheese')).not.toHaveClass('completed');
-
-
 });

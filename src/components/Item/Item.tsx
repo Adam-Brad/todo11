@@ -1,5 +1,6 @@
 import React from 'react';
 import Todo from '../../interfaces/Todo';
+import ToggleCompleteButton from '../ToggleCompleteButton/ToggleCompleteButton';
 import styles from './Item.module.css';
 
 interface ItemProps {
@@ -18,13 +19,13 @@ export default function Item(props: ItemProps) {
     const toggleComplete = () => handleToggleComplete(index);
 
     const itemClasses = todo.isCompleted ? `${styles.completed}` : ``;
-    
+
     return (
         <>
             <li className={itemClasses} key={todo.id}>{todo.text}</li>
             <button>Mark</button>
             <button data-testid={`${todo.text}-delete`} onClick={deleteFromList}>Delete</button>
-            <button data-testid={`${todo.text}-toggle`} onClick={toggleComplete}>Toggle Complete</button>
+            <ToggleCompleteButton todo={todo} toggleComplete={toggleComplete} />
         </>
     );
 }
