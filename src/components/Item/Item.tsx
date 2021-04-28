@@ -9,11 +9,12 @@ interface ItemProps {
     index: number
     handleDeleteFromList: (index: number) => void;
     handleToggleComplete: (index: number) => void;
+    handleSave: (task: string, index: number) => void;
 }
 
 export default function Item(props: ItemProps) {
     
-    const { todo, index, handleDeleteFromList, handleToggleComplete } = props;
+    const { todo, index, handleDeleteFromList, handleToggleComplete, handleSave } = props;
 
     const deleteFromList = () =>  handleDeleteFromList(index);
 
@@ -21,7 +22,11 @@ export default function Item(props: ItemProps) {
 
     return (
         <>
-            <ListItemText todo={todo} />
+            <ListItemText
+                todo={todo}
+                index={index}
+                handleSave={handleSave}
+            />
             <DeleteButton
                 todo={todo}
                 deleteFromList={deleteFromList}
