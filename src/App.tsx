@@ -32,6 +32,16 @@ function App() {
         setList(listAfterToggleComplete);
     };
 
+    const handleEditing = (updatedTodo: Todo) => {
+        const listAfterEditing = list.map((todo: Todo) => {
+            if (updatedTodo.id === todo.id) {
+                todo.text = updatedTodo.text;
+            }
+            return todo;
+        });
+        setList(listAfterEditing);
+    }
+
     return (
     <div className="App">
         <h1>Typescript Todo #11</h1>
@@ -40,6 +50,7 @@ function App() {
             list={list}
             handleDeleteFromList={handleDeleteFromList}
             handleToggleComplete={handleToggleComplete}
+            handleEditing={handleEditing}
         />
     </div>
   );

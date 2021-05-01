@@ -12,5 +12,5 @@ export default function DeleteButton(props: DeleteButtonProps) {
 
     return (
         <button data-testid={`${todo.text}-delete`} onClick={deleteFromList}>Delete</button>
-    )
+    );
 }
