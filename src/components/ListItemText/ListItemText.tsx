@@ -32,13 +32,13 @@ export default function ListItemText(props: ListItemTextProps) {
             {
             isEditable ?
                 <div>
-                    <input onChange={handleChange} value={todo.text}/>
-                    <button onClick={handleSave}>Click to Save</button>
+                    <input data-testid={`${todo.text}-input`} onChange={handleChange} value={todo.text}/>
+                    <button data-testid={`${todo.text}-save`} onClick={handleSave}>Click to Save</button>
                 </div>
                 :
                 <>
                     <li className={itemClasses} key={todo.id}>{todo.text}</li>
-                    <button onClick={toggleEditable}>Click to edit</button>
+                    <button data-testid={`${todo.text}-edit`} onClick={toggleEditable}>Click to edit</button>
                 </>
             }
         </>
