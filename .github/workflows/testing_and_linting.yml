@@ -13,7 +13,7 @@ jobs:
             - uses: artiomtr/jest-coverage-report-action@v1.2
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
-                  test_script: npm run test -- --coverage --coverageReporters="text" --coverageReporters="text-summary" --watchAll
+                  test_script: npm run test -- --coverage --coverageReporters="text" --coverageReporters="text-summary" 
                   threshold: 90
   test:
     name: Running Units Tests & Linting
