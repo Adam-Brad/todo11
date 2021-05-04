@@ -38,7 +38,6 @@ test('clicking a todo\'s delete button doesn\'t affect other todos', () => {
     addATodo(input, 'get bread', addButton);
     addATodo(input, 'get cheese', addButton);
     addATodo(input, 'get eggs', addButton);
-
     fireEvent.click(getByTestId('get cheese-delete'));
 
     expect(queryByText('get cheese')).not.toBeInTheDocument();
@@ -53,7 +52,6 @@ test('clicking a todo\'s mark button toggles on the classname with the strikethr
 
     addATodo(input, 'get bread', addButton);
     expect(getByText('get bread')).not.toHaveClass('completed');
-
     fireEvent.click(getByTestId('get bread-toggle'));
 
     expect(getByText('get bread')).toHaveClass('completed');
@@ -81,7 +79,6 @@ test('clicking a todo\'s mark button doesn\'t affect other todos styling or butt
     addATodo(input, 'get bread', addButton);
     addATodo(input, 'get eggs', addButton);
     addATodo(input, 'get cheese', addButton);
-
     fireEvent.click(getByTestId('get eggs-toggle'));
 
     expect(getByText('get eggs')).toHaveClass('completed');
