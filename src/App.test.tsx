@@ -171,3 +171,18 @@ test('clicking the delete all completed button removes only marked todos', () =>
     expect(getByText('get eggs')).toBeInTheDocument();
     expect(getByText('get meat')).toBeInTheDocument();
 });
+
+test('editing a todo to be a duplicate throws and error and doesn\'t add duplicate text', () => {
+    const {getByLabelText, getByText, getByTestId, getAllByText} = render(<App/>);
+    const input = getByLabelText('Add a todo to the list');
+    const addButton = getByText('Click to add a Todo');
+    window.alert = jest.fn();
+
+    addATodo(input, 'get bread', addButton);
+    addATodo(input, 'get eggs', addButton);
+    fireEvent.click(getByTestId('get bread-edit'));
+    addATodo(getByTestId('get bread-input'), 'get eggs', getByTestId('get bread-save'));
+
+    expect(window.alert).toHaveBeenCalledTimes(1);
+    expect(getAllByText('get eggs')).toHaveLength(1);
+});

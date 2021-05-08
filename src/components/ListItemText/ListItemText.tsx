@@ -4,7 +4,7 @@ import styles from './ListItemText.module.css'
 
 interface ListItemTextProps {
     todo: Todo;
-    handleEditing: (updatedTodo: Todo) => void;
+    handleEditing: (updatedTodo: Todo) => boolean;
 }
 
 export default function ListItemText(props: ListItemTextProps) {
@@ -17,15 +17,15 @@ export default function ListItemText(props: ListItemTextProps) {
         setIsEditable(!isEditable);
     };
 
-
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCurrentTask(event.target.value);
     };
 
     const handleSave = () => {
         todo.text = currentTask;
-        handleEditing(todo);
-        toggleEditable();
+        if (handleEditing(todo)) {
+            toggleEditable();
+        }
     }
 
     const itemClasses = todo.isCompleted ? `${styles.completed}` : ``;

@@ -6,7 +6,7 @@ interface ListProps {
     list: Todo[];
     handleDeleteFromList: (index: number) => void;
     handleToggleComplete: (index: number) => void;
-    handleEditing: (updatedTodo: Todo) => void;
+    handleEditing: (updatedTodo: Todo) => boolean;
 }
 
 export default function List(props: ListProps) {

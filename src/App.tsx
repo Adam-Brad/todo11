@@ -40,16 +40,19 @@ function App() {
 
     const handleEditing = (updatedTodo: Todo) => {
         if (checkForDuplicateEdit(updatedTodo, list)) {
-            return;
+            return false;
         }
-            const listAfterEditing = list.map((todo: Todo) => {
-                if (updatedTodo.id === todo.id) {
-                    todo.text = updatedTodo.text;
-                }
-                return todo;
-            });
-            setList(listAfterEditing);
-        };
+
+        const listAfterEditing = list.map((todo: Todo) => {
+            if (updatedTodo.id === todo.id) {
+                todo.text = updatedTodo.text;
+            }
+            return todo;
+        });
+
+        setList(listAfterEditing);
+        return true;
+    };
 
     const handleDeleteAllCompleted = () => {
         const listAfterDeleteAllCompleted = list.filter(todo => {
@@ -59,7 +62,6 @@ function App() {
         });
         setList(listAfterDeleteAllCompleted);
     };
-
 
     return (
     <div className="App">
@@ -71,7 +73,9 @@ function App() {
             handleToggleComplete={handleToggleComplete}
             handleEditing={handleEditing}
         />
-        <DeleteCompletedButton handleDeleteAllCompleted={handleDeleteAllCompleted} />
+        <div>
+            <DeleteCompletedButton handleDeleteAllCompleted={handleDeleteAllCompleted} />
+        </div>
     </div>
   );
 }

@@ -9,7 +9,7 @@ interface ItemProps {
     index: number;
     handleDeleteFromList: (index: number) => void;
     handleToggleComplete: (index: number) => void;
-    handleEditing: (updatedTodo: Todo) => void;
+    handleEditing: (updatedTodo: Todo) => boolean;
 }
 
 export default function Item(props: ItemProps) {
