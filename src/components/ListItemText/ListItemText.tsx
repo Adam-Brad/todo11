@@ -13,7 +13,11 @@ export default function ListItemText(props: ListItemTextProps) {
 
     const {todo, handleEditing} = props;
 
-    const toggleEditable = () => setIsEditable(!isEditable);
+    const toggleEditable = () => {
+        setIsEditable(!isEditable);
+        // setCurrentTask(todo.text);
+    };
+
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCurrentTask(event.target.value);
@@ -32,7 +36,7 @@ export default function ListItemText(props: ListItemTextProps) {
             {
             isEditable ?
                 <div>
-                    <input data-testid={`${todo.text}-input`} onChange={handleChange} value={todo.text}/>
+                    <input data-testid={`${todo.text}-input`} onChange={handleChange} value={currentTask}/>
                     <button data-testid={`${todo.text}-save`} onClick={handleSave}>Click to Save</button>
                 </div>
                 :
