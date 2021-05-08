@@ -152,3 +152,22 @@ test('editing a todo to be a duplicate throws an error', () => {
 
     expect(window.alert).toHaveBeenCalledTimes(1);
 });
+
+test('clicking the delete all completed button removes only marked todos', () => {
+    const {getByLabelText, getByText, getByTestId, queryByText} = render(<App/>);
+    const input = getByLabelText('Add a todo to the list');
+    const addButton = getByText('Click to add a Todo');
+
+    addATodo(input, 'get bread', addButton);
+    addATodo(input, 'get eggs', addButton);
+    addATodo(input, 'get cheese', addButton);
+    addATodo(input, 'get meat', addButton);
+    fireEvent.click(getByTestId("get bread-toggle"));
+    fireEvent.click(getByTestId("get cheese-toggle"));
+    fireEvent.click(getByText("Delete All Completed"));
+
+    expect(queryByText('get bread')).not.toBeInTheDocument();
+    expect(queryByText('get cheese')).not.toBeInTheDocument();
+    expect(getByText('get eggs')).toBeInTheDocument();
+    expect(getByText('get meat')).toBeInTheDocument();
+});

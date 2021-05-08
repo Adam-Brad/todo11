@@ -7,6 +7,7 @@ import List from './components/List/List';
 import checkForBlankError from "./errorHandlingService/checkForBlankError";
 import checkForDuplicateCreate from "./errorHandlingService/checkForDuplicateCreate";
 import checkForDuplicateEdit from "./errorHandlingService/checkForDuplicateEdit";
+import DeleteCompletedButton from "./components/DeleteCompletedButton/DeleteCompletedButton";
 
 function App() {
     const [list, setList] = useState<Todo[]>([]);
@@ -50,6 +51,15 @@ function App() {
             setList(listAfterEditing);
         };
 
+    const handleDeleteAllCompleted = () => {
+        const listAfterDeleteAllCompleted = list.filter(todo => {
+            if (todo.isCompleted === false) {
+                return todo;
+            }
+        });
+        setList(listAfterDeleteAllCompleted);
+    };
+
 
     return (
     <div className="App">
@@ -61,6 +71,7 @@ function App() {
             handleToggleComplete={handleToggleComplete}
             handleEditing={handleEditing}
         />
+        <DeleteCompletedButton handleDeleteAllCompleted={handleDeleteAllCompleted} />
     </div>
   );
 }

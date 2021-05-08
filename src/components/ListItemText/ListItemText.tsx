@@ -15,7 +15,6 @@ export default function ListItemText(props: ListItemTextProps) {
 
     const toggleEditable = () => {
         setIsEditable(!isEditable);
-        // setCurrentTask(todo.text);
     };
 
 
