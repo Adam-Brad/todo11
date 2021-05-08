@@ -115,3 +115,26 @@ test('editing and saving a todo doesn\'t affect other todos)', () => {
     expect(getByText('get meat')).toBeInTheDocument();
     expect(queryByText('get bread')).not.toBeInTheDocument();
 });
+
+test('creating a blank todo throws an error', () => {
+    const {getByLabelText, getByText, getByTestId, queryByText} = render(<App/>);
+    const input = getByLabelText('Add a todo to the list');
+    const addButton = getByText('Click to add a Todo');
+    window.alert = jest.fn();
+
+    addATodo(input, '', addButton);
+
+    expect(window.alert).toHaveBeenCalledTimes(1);
+});
+
+test('creating a duplicate todo throws an error', () => {
+    const {getByLabelText, getByText, getByTestId, queryByText} = render(<App/>);
+    const input = getByLabelText('Add a todo to the list');
+    const addButton = getByText('Click to add a Todo');
+    window.alert = jest.fn();
+
+    addATodo(input, 'get bread', addButton);
+    addATodo(input, 'get bread', addButton);
+
+    expect(window.alert).toHaveBeenCalledTimes(1);
+});

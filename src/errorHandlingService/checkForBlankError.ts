@@ -1,4 +1,4 @@
-export default function isTodoBlank(task: string) {
+export default function checkForBlankError(task: string) {
     if (task.length === 0) {
         alert('Blank todo');
         return false;
