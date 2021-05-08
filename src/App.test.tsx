@@ -117,7 +117,7 @@ test('editing and saving a todo doesn\'t affect other todos)', () => {
 });
 
 test('creating a blank todo throws an error', () => {
-    const {getByLabelText, getByText, getByTestId, queryByText} = render(<App/>);
+    const {getByLabelText, getByText} = render(<App/>);
     const input = getByLabelText('Add a todo to the list');
     const addButton = getByText('Click to add a Todo');
     window.alert = jest.fn();
@@ -128,7 +128,7 @@ test('creating a blank todo throws an error', () => {
 });
 
 test('creating a duplicate todo throws an error', () => {
-    const {getByLabelText, getByText, getByTestId, queryByText} = render(<App/>);
+    const {getByLabelText, getByText} = render(<App/>);
     const input = getByLabelText('Add a todo to the list');
     const addButton = getByText('Click to add a Todo');
     window.alert = jest.fn();
