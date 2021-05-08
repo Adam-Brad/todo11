@@ -138,3 +138,17 @@ test('creating a duplicate todo throws an error', () => {
 
     expect(window.alert).toHaveBeenCalledTimes(1);
 });
+
+test('editing a todo to be a duplicate throws an error', () => {
+    const {getByLabelText, getByText, getByTestId} = render(<App/>);
+    const input = getByLabelText('Add a todo to the list');
+    const addButton = getByText('Click to add a Todo');
+    window.alert = jest.fn();
+
+    addATodo(input, 'get bread', addButton);
+    addATodo(input, 'get eggs', addButton);
+    fireEvent.click(getByTestId("get eggs-edit"));
+    addATodo(getByTestId("get eggs-input"), "get bread", getByTestId("get eggs-save"));
+
+    expect(window.alert).toHaveBeenCalledTimes(1);
+});
