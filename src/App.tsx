@@ -23,12 +23,6 @@ function App() {
     //         setList([...list, todoToAdd]);
     //     }
     // };
-    
-    const handleDeleteFromList = (index: number) => {
-        const listAfterDelete = list.filter((todo: Todo, i: number) => i !== index);
-        setList(listAfterDelete);
-    }
-
     const handleToggleComplete = (index: number) => {
         const listAfterToggleComplete = list.map((todo: Todo, i: number) => {
             if (i === index) {
@@ -69,7 +63,6 @@ function App() {
         <h1>Typescript Todo #11</h1>
         <Input />
         <List
-            handleDeleteFromList={handleDeleteFromList}
             handleToggleComplete={handleToggleComplete}
             handleEditing={handleEditing}
         />

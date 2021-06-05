@@ -1,10 +1,13 @@
+import Todo from "../interfaces/Todo";
+import { v4 as uuidv4 } from 'uuid';
+
 
 const initialState = {
     list: []
 }
 
 interface StoreState {
-    list: string[]
+    list: Todo[]
 }
 
 interface AddTodoAction {
@@ -15,8 +18,18 @@ interface AddTodoAction {
 export const listReducer = (state: StoreState = initialState, action: AddTodoAction): StoreState => {
     switch (action.type) {
         case 'ADD':
+            const todoToAdd: Todo = {
+                text: action.payload,
+                isCompleted: false,
+                id: uuidv4()
+            }
             return {
-                list: [...state.list, action.payload]
+                list: [...state.list, todoToAdd]
+            }
+        case 'DELETE':
+            const listAfterDelete = state.list.filter((todo: Todo) => todo.id !== action.payload);
+            return {
+                list: listAfterDelete
             }
         default:
             return state

@@ -5,20 +5,18 @@ import {connect} from "react-redux";
 
 interface ListProps {
     list: Todo[];
-    handleDeleteFromList: (index: number) => void;
     handleToggleComplete: (index: number) => void;
     handleEditing: (updatedTodo: Todo) => boolean;
 }
 
 function List(props: ListProps) {
 
-    const { list, handleDeleteFromList, handleToggleComplete, handleEditing } = props;
+    const { list, handleToggleComplete, handleEditing } = props;
 
     const displayedList = list.map((todo: Todo, index: number) => (
         <Item
             todo={todo}
             index={index}
-            handleDeleteFromList={handleDeleteFromList}
             handleToggleComplete={handleToggleComplete}
             handleEditing={handleEditing}
         />

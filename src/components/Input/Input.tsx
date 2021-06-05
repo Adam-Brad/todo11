@@ -1,8 +1,14 @@
 import React, {useState} from "react";
 import {connect} from "react-redux";
+import {Dispatch} from "redux";
 
 interface InputProps {
     handleAddToList: (task: string) => void;
+}
+
+interface AddTodoAction {
+    type: string;
+    payload: string;
 }
 
 function Input(props: InputProps) {
@@ -28,7 +34,7 @@ function Input(props: InputProps) {
     );
 };
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: Dispatch<AddTodoAction>) => ({
     handleAddToList: (task: string) => dispatch({
         type: 'ADD',
         payload: task
