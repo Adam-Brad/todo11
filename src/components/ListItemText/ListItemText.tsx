@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import Todo from '../../interfaces/Todo';
 import styles from './ListItemText.module.css'
+import {connect} from "react-redux";
 
 interface ListItemTextProps {
     todo: Todo;
     handleEditing: (updatedTodo: Todo) => boolean;
 }
 
-export default function ListItemText(props: ListItemTextProps) {
+function ListItemText(props: ListItemTextProps) {
     const [currentTask, setCurrentTask] = useState<string>(props.todo.text);
     const [isEditable, setIsEditable] = useState<boolean>(false);
 
@@ -46,4 +47,17 @@ export default function ListItemText(props: ListItemTextProps) {
             }
         </>
     );
+};
+
+interface StoreState {
+    list: Todo[]
 }
+
+const mapStateToProps = (state: StoreState) => ({
+    list: state.list
+})
+
+export default connect(
+    mapStateToProps,
+    () => ({})
+)(ListItemText);

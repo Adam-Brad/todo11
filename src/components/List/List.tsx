@@ -1,6 +1,7 @@
 import React from 'react';
 import Todo from '../../interfaces/Todo';
 import Item from '../Item/Item';
+import {connect} from "react-redux";
 
 interface ListProps {
     list: Todo[];
@@ -9,7 +10,7 @@ interface ListProps {
     handleEditing: (updatedTodo: Todo) => boolean;
 }
 
-export default function List(props: ListProps) {
+function List(props: ListProps) {
 
     const { list, handleDeleteFromList, handleToggleComplete, handleEditing } = props;
 
@@ -28,4 +29,17 @@ export default function List(props: ListProps) {
             {displayedList}
         </>
     );
+};
+
+interface StoreState {
+    list: Todo[];
 }
+
+const mapStateToProps = (state: StoreState) => ({
+    list: state.list
+})
+
+export default connect(
+    mapStateToProps,
+    () => ({})
+)(List);

@@ -1,10 +1,11 @@
 import React, {useState} from "react";
+import {connect} from "react-redux";
 
 interface InputProps {
     handleAddToList: (task: string) => void;
 }
 
-export default function Input(props: InputProps) {
+function Input(props: InputProps) {
     const [task, setTask] = useState<string>('');
 
     const { handleAddToList } = props;
@@ -25,4 +26,16 @@ export default function Input(props: InputProps) {
           <button onClick={addToList}>Click to add a Todo</button>
       </>
     );
-}
+};
+
+const mapDispatchToProps = (dispatch: any) => ({
+    handleAddToList: (task: string) => dispatch({
+        type: 'ADD',
+        payload: task
+    })
+});
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(Input)
