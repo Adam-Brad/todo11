@@ -31,6 +31,16 @@ export const listReducer = (state: StoreState = initialState, action: AddTodoAct
             return {
                 list: listAfterDelete
             }
+        case 'TOGGLE COMPLETE' :
+            const listAfterToggleComplete = state.list.map((todo: Todo) => {
+                if (todo.id === action.payload) {
+                    todo.isCompleted = !todo.isCompleted;
+                }
+                return todo;
+            });
+            return {
+                list: listAfterToggleComplete
+            }
         default:
             return state
     }

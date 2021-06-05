@@ -13,26 +13,6 @@ import {connect} from "react-redux";
 function App() {
     const [list, setList] = useState<Todo[]>([]);
 
-    // const handleAddToList = (task: string) => {
-    //     if (checkForBlankError(task) && checkForDuplicateCreate(list, task)){
-    //         const todoToAdd: Todo = {
-    //             text: task,
-    //             isCompleted: false,
-    //             id: uuidv4()
-    //         }
-    //         setList([...list, todoToAdd]);
-    //     }
-    // };
-    const handleToggleComplete = (index: number) => {
-        const listAfterToggleComplete = list.map((todo: Todo, i: number) => {
-            if (i === index) {
-                todo.isCompleted = !todo.isCompleted;
-            }
-            return todo;
-        });
-        setList(listAfterToggleComplete);
-    };
-
     const handleEditing = (updatedTodo: Todo) => {
         if (checkForDuplicateEdit(updatedTodo, list)) {
             return false;
@@ -63,7 +43,6 @@ function App() {
         <h1>Typescript Todo #11</h1>
         <Input />
         <List
-            handleToggleComplete={handleToggleComplete}
             handleEditing={handleEditing}
         />
         <div>

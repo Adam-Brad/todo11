@@ -6,16 +6,13 @@ import ToggleCompleteButton from '../ToggleCompleteButton/ToggleCompleteButton';
 
 interface ItemProps {
     todo: Todo;
-    index: number;
-    handleToggleComplete: (index: number) => void;
     handleEditing: (updatedTodo: Todo) => boolean;
 }
 
 export default function Item(props: ItemProps) {
     
-    const { todo, index, handleToggleComplete, handleEditing } = props;
+    const { todo, handleEditing } = props;
 
-    const toggleComplete = () => handleToggleComplete(index);
 
     return (
         <>
@@ -28,7 +25,6 @@ export default function Item(props: ItemProps) {
             />
             <ToggleCompleteButton
                 todo={todo}
-                toggleComplete={toggleComplete}
             />
         </>
     );
