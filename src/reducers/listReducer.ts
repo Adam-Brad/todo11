@@ -41,6 +41,15 @@ export const listReducer = (state: StoreState = initialState, action: AddTodoAct
             return {
                 list: listAfterToggleComplete
             }
+        case 'DELETE ALL COMPLETED' :
+            const listAfterDeleteAllCompleted = state.list.filter(todo => {
+                if (todo.isCompleted === false) {
+                    return todo;
+                }
+            });
+            return {
+                list: listAfterDeleteAllCompleted
+            }
         default:
             return state
     }

@@ -29,15 +29,6 @@ function App() {
         return true;
     };
 
-    const handleDeleteAllCompleted = () => {
-        const listAfterDeleteAllCompleted = list.filter(todo => {
-            if (todo.isCompleted === false) {
-                return todo;
-            }
-        });
-        setList(listAfterDeleteAllCompleted);
-    };
-
     return (
     <div className="App">
         <h1>Typescript Todo #11</h1>
@@ -46,7 +37,7 @@ function App() {
             handleEditing={handleEditing}
         />
         <div>
-            <DeleteCompletedButton handleDeleteAllCompleted={handleDeleteAllCompleted} />
+            <DeleteCompletedButton />
         </div>
     </div>
   );
