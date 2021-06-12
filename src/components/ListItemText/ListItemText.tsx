@@ -2,17 +2,18 @@ import React, {useState} from 'react';
 import Todo from '../../interfaces/Todo';
 import styles from './ListItemText.module.css'
 import {connect} from "react-redux";
+import {Dispatch} from "redux";
 
 interface ListItemTextProps {
     todo: Todo;
-    handleEditing: (updatedTodo: Todo) => boolean;
+    handleEditing: (updatedTodo: Todo) => ActionType;
 }
 
-function ListItemText(props: ListItemTextProps) {
+export function ListItemText(props: ListItemTextProps) {
     const [currentTask, setCurrentTask] = useState<string>(props.todo.text);
     const [isEditable, setIsEditable] = useState<boolean>(false);
 
-    const {todo, handleEditing} = props;
+    const {todo} = props;
 
     const toggleEditable = () => {
         setIsEditable(!isEditable);
@@ -24,9 +25,7 @@ function ListItemText(props: ListItemTextProps) {
 
     const handleSave = () => {
         todo.text = currentTask;
-        if (handleEditing(todo)) {
-            toggleEditable();
-        }
+        toggleEditable();
     }
 
     const itemClasses = todo.isCompleted ? `${styles.completed}` : ``;
@@ -55,9 +54,33 @@ interface StoreState {
 
 const mapStateToProps = (state: StoreState) => ({
     list: state.list
-})
+});
+
+interface ActionType {
+    type: string;
+    payload: Todo
+}
+
+// function mapDispatchToProps(dispatch: Dispatch) {
+//     return {
+//         handleEditing: function(todo: Todo) {
+//             const retValueOfDispatch: ActionType = dispatch({
+//                 type: 'EDIT',
+//                 payload: todo
+//             });
+//             return retValueOfDispatch;
+//         }
+//     }
+// }
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+    handleEditing: (todo: Todo): ActionType => dispatch({
+        type: 'EDIT',
+        payload: todo
+    })
+});
 
 export default connect(
     mapStateToProps,
-    () => ({})
+    mapDispatchToProps
 )(ListItemText);

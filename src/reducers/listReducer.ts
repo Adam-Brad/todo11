@@ -1,33 +1,31 @@
 import Todo from "../interfaces/Todo";
-import { v4 as uuidv4 } from 'uuid';
-
 
 const initialState = {
     list: []
 }
 
 interface StoreState {
-    list: Todo[]
+    list: Array<Todo>
 }
 
 interface AddTodoAction {
     type: string;
+    payload: Todo;
+}
+
+interface ToggleCompleteAction {
+    type: string;
     payload: string;
 }
 
-export const listReducer = (state: StoreState = initialState, action: AddTodoAction): StoreState => {
+export const listReducer = (state: StoreState = initialState, action: AddTodoAction | ToggleCompleteAction): StoreState => {
     switch (action.type) {
         case 'ADD':
-            const todoToAdd: Todo = {
-                text: action.payload,
-                isCompleted: false,
-                id: uuidv4()
-            }
             return {
-                list: [...state.list, todoToAdd]
+                list: [...state.list, <Todo>action.payload]
             }
         case 'DELETE':
-            const listAfterDelete = state.list.filter((todo: Todo) => todo.id !== action.payload);
+            const listAfterDelete = state.list.filter((todo: Todo) => todo.id !== (<Todo>action.payload).id);
             return {
                 list: listAfterDelete
             }
@@ -47,9 +45,24 @@ export const listReducer = (state: StoreState = initialState, action: AddTodoAct
                     return todo;
                 }
             });
+            if (listAfterDeleteAllCompleted.length === state.list.length) {
+                alert('No completed todos to delete');
+                return state;
+            }
             return {
                 list: listAfterDeleteAllCompleted
             }
+        case 'EDIT' :
+                const listAfterEditing = state.list.map((todo: Todo) => {
+                    if ((<Todo>action.payload).id === todo.id) {
+                        todo.text = (<Todo>action.payload).text;
+                    }
+                    return todo;
+                });
+
+                return {
+                    list: listAfterEditing
+                }
         default:
             return state
     }

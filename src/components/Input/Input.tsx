@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
+import Todo from "../../interfaces/Todo";
+import { v4 as uuidv4 } from 'uuid';
 
 interface InputProps {
     handleAddToList: (task: string) => void;
@@ -8,7 +10,7 @@ interface InputProps {
 
 interface AddTodoAction {
     type: string;
-    payload: string;
+    payload: Todo;
 }
 
 function Input(props: InputProps) {
@@ -37,7 +39,11 @@ function Input(props: InputProps) {
 const mapDispatchToProps = (dispatch: Dispatch<AddTodoAction>) => ({
     handleAddToList: (task: string) => dispatch({
         type: 'ADD',
-        payload: task
+        payload: {
+            text: task,
+            isCompleted: false,
+            id: uuidv4()
+        }
     })
 });
 
