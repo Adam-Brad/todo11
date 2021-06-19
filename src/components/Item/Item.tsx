@@ -5,25 +5,25 @@ import ListItemText from '../ListItemText/ListItemText';
 import ToggleCompleteButton from '../ToggleCompleteButton/ToggleCompleteButton';
 
 interface ItemProps {
-    todo: Todo;
+  todo: Todo;
 }
 
 export default function Item(props: ItemProps) {
-    
-    const { todo } = props;
+
+  const {todo} = props;
 
 
-    return (
-        <>
-            <ListItemText
-                todo={todo}
-            />
-            <DeleteButton
-                todo={todo}
-            />
-            <ToggleCompleteButton
-                todo={todo}
-            />
-        </>
-    );
+  return (
+    <>
+      <ListItemText
+        todo={todo}
+      />
+      <DeleteButton
+        todo={todo}
+      />
+      <ToggleCompleteButton
+        todo={todo}
+      />
+    </>
+  );
 }

@@ -4,33 +4,33 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 
 interface ToggleCompleteButtonProps {
-    todo: Todo;
-    toggleComplete: (todo: Todo) => void;
+  todo: Todo;
+  toggleComplete: (todo: Todo) => void;
 }
 
 function ToggleCompleteButton(props: ToggleCompleteButtonProps) {
 
-    const { todo, toggleComplete } = props;
+  const {todo, toggleComplete} = props;
 
-    const toggleCompleteButtonText = todo.isCompleted ? `Unmark` : `Mark`;
+  const toggleCompleteButtonText = todo.isCompleted ? `Unmark` : `Mark`;
 
-    const handleToggle = () => {
-        toggleComplete(todo)
-    }
+  const handleToggle = () => {
+    toggleComplete(todo)
+  }
 
-    return (
-        <button data-testid={`${todo.text}-toggle`} onClick={handleToggle}>{toggleCompleteButtonText}</button>
-    );
-};
+  return (
+    <button data-testid={`${todo.text}-toggle`} onClick={handleToggle}>{toggleCompleteButtonText}</button>
+  );
+}
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-    toggleComplete: (todo: Todo) => dispatch({
-        type: 'TOGGLE COMPLETE',
-        payload: todo.id
-    })
+  toggleComplete: (todo: Todo) => dispatch({
+    type: 'TOGGLE COMPLETE',
+    payload: todo.id
+  })
 });
 
 export default connect(
-    null,
-    mapDispatchToProps
+  null,
+  mapDispatchToProps
 )(ToggleCompleteButton);
