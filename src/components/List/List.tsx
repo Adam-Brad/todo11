@@ -14,6 +14,7 @@ function List(props: ListProps) {
   const displayedList = list.map((todo: Todo) => (
     <Item
       todo={todo}
+      key={todo.id}
     />
   ));
 

@@ -6,7 +6,7 @@ import {createStore} from "redux";
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {listReducer} from "./reducers/listReducer";
-import {AppContainer} from "./App";
+import AppContainer from "./App";
 
 // @ts-ignore
 const store = createStore(listReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

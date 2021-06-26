@@ -12,7 +12,6 @@ export default function Item(props: ItemProps) {
 
   const {todo} = props;
 
-
   return (
     <>
       <ListItemText

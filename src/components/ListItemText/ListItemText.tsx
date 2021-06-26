@@ -3,6 +3,7 @@ import Todo from '../../interfaces/Todo';
 import styles from './ListItemText.module.css'
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
+import StoreState from "../../interfaces/StoreState";
 
 interface ListItemTextProps {
   todo: Todo;
@@ -46,10 +47,6 @@ export function ListItemText(props: ListItemTextProps) {
       }
     </>
   );
-}
-
-interface StoreState {
-  list: Todo[]
 }
 
 const mapStateToProps = (state: StoreState) => ({
